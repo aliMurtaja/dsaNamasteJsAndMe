@@ -824,113 +824,116 @@ console.log("-------------");
 
 // --------------------------- 7
 
-// 707. Design Linked List
-/**
- * Your MyLinkedList object will be instantiated and called as such:
- * var obj = new MyLinkedList()
- * var param_1 = obj.get(index)
- * obj.addAtHead(val)
- * obj.addAtTail(val)
- * obj.addAtIndex(index,val)
- * obj.deleteAtIndex(index)
- */
+// // 707. Design Linked List
+// /**
+//  * Your MyLinkedList object will be instantiated and called as such:
+//  * var obj = new MyLinkedList()
+//  * var param_1 = obj.get(index)
+//  * obj.addAtHead(val)
+//  * obj.addAtTail(val)
+//  * obj.addAtIndex(index,val)
+//  * obj.deleteAtIndex(index)
+//  */
 
-class CreateNode {
-  constructor(val) {
-    this.val = val;
-    this.next = null;
-  }
-}
-var MyLinkedList = function (val) {
-  this.head = null;
-  this.next = null;
-  this.size = 0;
-  let newNode = new CreateNode(val);
-  this.head = newNode;
-};
+// class CreateNode {
+//   constructor(val) {
+//     this.val = val;
+//     this.next = null;
+//   }
+// }
+// var MyLinkedList = function (val) {
+//   this.head = null;
+//   this.next = null;
+//   this.size = 0;
+//   let newNode = new CreateNode(val);
+//   this.head = newNode;
+// };
 
-MyLinkedList.prototype.addAtHead = function (val) {
-  // 1 // new CreateNode(val)
-  // 1 --> 2 --> 3 // newNode.next=this.head
-  let newNode = new CreateNode(val);
-  newNode.next = this.head;
-  this.head = newNode;
-  this.size++;
-};
+// MyLinkedList.prototype.addAtHead = function (val) {
+//   // 1 // new CreateNode(val)
+//   // 1 --> 2 --> 3 // newNode.next=this.head
+//   let newNode = new CreateNode(val);
+//   newNode.next = this.head;
+//   this.head = newNode;
+//   this.size++;
+// };
 
-MyLinkedList.prototype.addAtTail = function (val) {
-  // 4 // new CreateNode(val)
-  // 1 --> 2 --> 3 // newNode.next=this.head
-  let newNode = new CreateNode(val);
-  let head = this.head;
-  let isTailNodeGet = false;
-  let nextNode = head;
+// MyLinkedList.prototype.addAtTail = function (val) {
+//   // 4 // new CreateNode(val)
+//   // 1 --> 2 --> 3 // newNode.next=this.head
+//   let newNode = new CreateNode(val);
+//   let head = this.head;
+//   let isTailNodeGet = false;
+//   let nextNode = head;
 
-  if (this.head === null) {
-    this.head = null;
-    this.next = null;
-    let newNode = new CreateNode(val);
-    this.head = newNode;
-    this.size = 0;
-    return;
-  }
-  while (!isTailNodeGet) {
-    if (nextNode.next !== null) {
-      nextNode = nextNode.next;
-    } else {
-      nextNode.next = newNode;
-      this.size++;
-      isTailNodeGet = true;
-    }
-  }
-};
+//   if (this.head === null) {
+//     this.head = null;
+//     this.next = null;
+//     let newNode = new CreateNode(val);
+//     this.head = newNode;
+//     this.size = 0;
+//     return;
+//   }
+//   while (!isTailNodeGet) {
+//     if (nextNode.next !== null) {
+//       nextNode = nextNode.next;
+//     } else {
+//       nextNode.next = newNode;
+//       this.size++;
+//       isTailNodeGet = true;
+//     }
+//   }
+// };
 
-MyLinkedList.prototype.addAtIndex = function (index, val) {
-  // 1 --> 2 --> 3 --> 4 --> 5
+// MyLinkedList.prototype.addAtIndex = function (index, val) {
+//   // 1 --> 2 --> 3 --> 4 --> 5
 
-  if (index < 0 || index > this.size) return;
-  if (index === 0) return this.addAtHead(val);
-  if (index === this.size) return this.addAtTail(val);
-  const newNode = new CreateNode(val);
-  let curr = this.head;
-  for (let i = 0; i < index - 1; i++) curr = curr.next;
-  newNode.next = curr.next;
-  curr.next = newNode;
-  this.size++;
-};
+//   if (index < 0 || index > this.size) return;
+//   if (index === 0) return this.addAtHead(val);
+//   if (index === this.size) return this.addAtTail(val);
+//   const newNode = new CreateNode(val);
+//   let curr = this.head;
+//   for (let i = 0; i < index - 1; i++) curr = curr.next;
+//   newNode.next = curr.next;
+//   curr.next = newNode;
+//   this.size++;
+// };
 
-MyLinkedList.prototype.get = function (index) {
-  // 3 --> 4
-  // 1 --> 2 --> 3 --> 6 --> 4 --> 5
-  if (index < 0 || index > this.size) return -1;
-  let curr = this.head;
-  for (let i = 0; i < index; i++) {
-    curr = curr.next;
-  }
-  return curr.val;
-};
+// MyLinkedList.prototype.get = function (index) {
+//   // 3 --> 4
+//   // 1 --> 2 --> 3 --> 6 --> 4 --> 5
+//   if (index < 0 || index > this.size) return -1;
+//   let curr = this.head;
+//   for (let i = 0; i < index; i++) {
+//     curr = curr.next;
+//   }
+//   return curr.val;
+// };
 
-MyLinkedList.prototype.deleteAtIndex = function (index) {
-  // 3 --> 14
-  // 1 --> 2 --> 3 --> 14 --> 5
+// MyLinkedList.prototype.deleteAtIndex = function (index) {
+//   // 3 --> 14
+//   // 1 --> 2 --> 3 --> 14 --> 5
 
-  if (index < 0 || index > this.size) return;
-  if (index === 0) this.head = this.head.next;
-  else {
-    let curr = this.head;
-    for (let i = 0; i < index - 1; i++) curr = curr.next;
-    curr.next = curr.next.next;
-  }
-  this.size--;
-};
+//   if (index < 0 || index > this.size) return;
+//   if (index === 0) this.head = this.head.next;
+//   else {
+//     let curr = this.head;
+//     for (let i = 0; i < index - 1; i++) curr = curr.next;
+//     curr.next = curr.next.next;
+//   }
+//   this.size--;
+// };
 
 // var obj = new MyLinkedList(2);
 // obj.addAtHead(1);
-// obj.addAtTail(3);
+// obj.addAtTail(25);
 // obj.addAtTail(14);
 // obj.addAtTail(5);
-// // obj.deleteAtIndex(3);
+// obj.addAtIndex(3, 15);
+// // obj.get(2);
+// obj.deleteAtIndex(2);
 // console.log(obj);
+// // console.log(obj.get(2));
 console.log("----------");
 // 876. Middle of the Linked List
 function middleNodeByMe() {
@@ -944,7 +947,13 @@ function middleNodeByMe() {
           val: 14,
           next: {
             val: 5,
-            next: null,
+            next: {
+              val: 20,
+              next: {
+                val: 25,
+                next: null,
+              },
+            },
           },
         },
       },
@@ -963,11 +972,14 @@ function middleNodeByMe() {
     } else {
       isTailNodeGet = true;
     }
+    // console.log(nextNode);
     size++;
   }
   size--;
-
+  // 1 --> 2 --> 3 --> 14 --> 5 --> 20
+  // 1 --> 2 --> 3 --> 14 --> 5 --> 20 --> 12
   let terminationCondi = Math.ceil(size / 2);
+  // console.log(terminationCondi, size);
   if (size % 2 === 0) {
     terminationCondi = size / 2;
   }
@@ -977,11 +989,12 @@ function middleNodeByMe() {
   }
   return curr;
 }
-// middleNodeByMe();
+// console.log(middleNodeByMe());
 
 function middleNodeByMeNamasteJs() {
   // 1,2,3,4,5,6
   // 1 --> 2 --> 3 --> 14 --> 5 --> 20
+  // 1 --> 2 --> 3 --> 14 --> 5 --> 20 --> 12
   let head = {
     val: 1,
     next: {
@@ -1011,9 +1024,8 @@ function middleNodeByMeNamasteJs() {
     console.log(slow, fast);
   }
   // return slow;
-  console.log(slow);
+  // console.log(slow);
 }
-
 // middleNodeByMeNamasteJs();
 
 function reversedLinkedListByNamasteJs() {
@@ -1053,6 +1065,7 @@ function reversedLinkedListByNamasteJs() {
   head = preViouse;
   console.log(head);
 }
+// console.log(reversedLinkedListByNamasteJs());
 
 function LinkedListCycle() {
   // 1 --> 2 --> 3 --> 14 --> 5 --> 20 --> null // not cycle
@@ -1062,7 +1075,7 @@ function LinkedListCycle() {
     next: {
       val: 2,
       next: {
-        val: 3,
+        val: 25,
         next: {
           val: 14,
           next: {
@@ -1070,7 +1083,7 @@ function LinkedListCycle() {
             next: {
               val: 20,
               next: {
-                val: 3,
+                val: 13,
                 next: null,
               },
             },
@@ -1087,14 +1100,11 @@ function LinkedListCycle() {
     if (!setDataStructure.has(curr.val)) {
       setDataStructure.add(curr.val);
     } else {
-      console.log("get cycle", curr);
+      // console.log("get cycle", curr);
       return true;
     }
     curr = curr.next;
   }
-  if (!curr) {
-    return false;
-  }
+  return false;
 }
-
-// console.log(LinkedListCycle());
+console.log(LinkedListCycle());
