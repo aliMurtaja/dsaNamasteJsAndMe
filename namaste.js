@@ -1107,4 +1107,181 @@ function LinkedListCycle() {
   }
   return false;
 }
-console.log(LinkedListCycle());
+// console.log(LinkedListCycle());
+
+// ------------------------------------------
+console.log("Linked List from scrach");
+
+class CreateNode {
+  constructor(val) {
+    this.val = val;
+    this.next = null;
+  }
+}
+class MyLinkedList {
+  constructor() {
+    this.head = null;
+    this.linkedListLength = 0; // indexs
+    // let newNode = new CreateNode(val);
+    // this.head = newNode;
+  }
+  // head -> 10 -> null
+  addAtHead(val) {
+    let newNode = new CreateNode(val);
+    newNode.next = this.head;
+    this.head = newNode;
+    this.linkedListLength++;
+  }
+
+  // head -> 2 -> 3 -> 10 -> null
+  addAtTail(val) {
+    let newNode = new CreateNode(val);
+    let curr = this.head; // Keep in mind curr will hold reference
+
+    if (curr === null) {
+      this.head = newNode; // here we are using this.head bcs curr is not pointing reference
+      this.linkedListLength++;
+      return;
+    }
+    while (curr && curr.next) {
+      // <-- loop start from here 0->2,  1->10
+      curr = curr.next;
+    }
+    curr.next = newNode;
+    this.linkedListLength++;
+  }
+
+  // This is working
+  // This is bad idea
+  // bcs in general if know where to go(which index), then use for loop
+  // addAtIndexBadWay(index, val) {
+  //   // find size
+  //   let newNode = new CreateNode(val);
+  //   let curr = this.head;
+
+  //   //
+  //   if (index > 0 && curr === null) {
+  //     return;
+  //   }
+
+  //   // if first index
+  //   if (index === 0) {
+  //     this.addAtHead(val);
+  //     return;
+  //   }
+
+  //   // 2 -> 4 -> 14 -> null
+  //   let count = 0;
+  //   while (curr) {
+  //     // <-- loop start from here 0->2,  1->10
+  //     curr = curr.next;
+  //     count++;
+  //   }
+
+  //   // if last index
+  //   if (index === count) {
+  //     this.addAtTail(val);
+  //     return;
+  //   }
+
+  //   // 15
+  //   // 2 -> 4 -> 14 -> null
+  //   let newCount = 0;
+  //   if (count > index) {
+  //     let curr = this.head;
+  //     while (curr && curr.next) {
+  //       // <-- loop start from here 0->2,  1->10
+  //       if (newCount === index - 1) {
+  //         let nextTemp = curr.next;
+  //         curr.next = newNode;
+  //         newNode.next = nextTemp;
+  //       }
+  //       curr = curr.next;
+  //       newCount++;
+  //     }
+  //   }
+  // }
+
+  // in general if know where to go(which index), then use for loop
+  addAtIndex(index, val) {
+    let newNode = new CreateNode(val);
+    let curr = this.head;
+
+    if (index > this.linkedListLength) {
+      return;
+    }
+
+    // if first index
+    if (index === 0) {
+      this.addAtHead(val);
+      return;
+    }
+
+    // if last index
+    if (index === this.linkedListLength) {
+      console.log(index, this.linkedListLength);
+      this.addAtTail(val);
+      return;
+    }
+
+    // 2, 15
+    // 4 -> 6 -> 14 -> null
+    for (let i = 0; i < index - 1; i++) {
+      curr = curr.next;
+    }
+    // console.log(curr);
+    newNode.next = curr.next;
+    curr.next = newNode;
+    this.linkedListLength++;
+    // newNode.next = curr.next
+  }
+
+  // 2 -> 4 -> 6 -> 14 -> null
+  // if know where to go(which index), then use for loop
+  get(index) {
+    let curr = this.head;
+
+    if (index < 0 || index >= this.linkedListLength) {
+      return -1;
+    }
+    for (let i = 0; i < index; i++) {
+      curr = curr.next;
+    }
+    return curr;
+  }
+
+  // if know where to go(which index), then use for loop
+  deleteAtIndex(index) {
+    if (index < 0 || index >= this.linkedListLength) {
+      return -1;
+    }
+
+    // if first element
+    if (index === 0) {
+      this.head = this.head.next;
+      this.linkedListLength--;
+      return;
+    }
+
+    // 2
+    // 2 -> 4 -> 6 -> 14 -> null
+    let curr = this.head;
+    for (let i = 0; i < index - 1; i++) {
+      curr = curr.next;
+    }
+    curr.next = curr.next.next;
+    this.linkedListLength--;
+  }
+}
+
+let LinkedListObj = new MyLinkedList();
+// LinkedListObj.addAtHead(10);
+LinkedListObj.addAtHead(2);
+LinkedListObj.addAtTail(4);
+LinkedListObj.addAtTail(6);
+LinkedListObj.addAtTail(14);
+LinkedListObj.deleteAtIndex(0);
+// console.log(LinkedListObj.get(0));
+// LinkedListObj.addAtIndex(2, 15);
+
+console.log(LinkedListObj);
