@@ -1118,6 +1118,8 @@ class CreateNode {
     this.next = null;
   }
 }
+
+// 707. Design Linked List
 class MyLinkedList {
   constructor() {
     this.head = null;
@@ -1274,14 +1276,422 @@ class MyLinkedList {
   }
 }
 
+// 707. Design Linked List
 let LinkedListObj = new MyLinkedList();
 // LinkedListObj.addAtHead(10);
-LinkedListObj.addAtHead(2);
+// LinkedListObj.addAtHead(2);
+LinkedListObj.addAtTail(1);
+LinkedListObj.addAtTail(2);
+LinkedListObj.addAtTail(3);
 LinkedListObj.addAtTail(4);
+LinkedListObj.addAtTail(5);
 LinkedListObj.addAtTail(6);
-LinkedListObj.addAtTail(14);
-LinkedListObj.deleteAtIndex(0);
+LinkedListObj.addAtTail(7);
+// LinkedListObj.deleteAtIndex(0);
 // console.log(LinkedListObj.get(0));
 // LinkedListObj.addAtIndex(2, 15);
+// console.log(LinkedListObj);
 
-console.log(LinkedListObj);
+// 876. Middle of the Linked List
+function middleNode() {
+  let head = {
+    val: 1,
+    next: {
+      val: 2,
+      next: {
+        val: 3,
+        next: {
+          val: 4,
+          next: {
+            val: 5,
+            next: {
+              val: 6,
+              next: {
+                val: 7,
+                next: {
+                  val: 8,
+                  next: null,
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+  };
+  // 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7
+  // 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8
+  let slow = head;
+  let fast = head;
+  while (fast && fast.next) {
+    // <-- first these both(slow/fast) pointe to head, after completing it point to next or next.next of head will be availiable for next iteration
+    slow = slow.next;
+    fast = fast.next.next;
+    // console.log(slow, fast);
+  }
+  return slow.val;
+}
+// console.log(middleNode());
+
+// 206. Reverse Linked List
+function reverseList() {
+  let head = {
+    val: 1,
+    next: {
+      val: 2,
+      next: {
+        val: 3,
+        next: {
+          val: 4,
+          next: {
+            val: 5,
+            next: {
+              val: 6,
+              next: {
+                val: 7,
+                next: {
+                  val: 8,
+                  next: null,
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+  };
+
+  // 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8
+  let preViouse = null;
+  let current = head;
+
+  while (current) {
+    let temp = current.next;
+    current.next = preViouse;
+    // console.log("hhhh 4", temp, current.next, temp === current.next);
+    preViouse = current;
+    current = temp;
+  }
+  // console.log("hhhh 4", head);
+  // here I will get head { "val": 1, "next": null }, bcs of this line current.next = preViouse
+  head = preViouse;
+  return head;
+}
+// console.log(reverseList());
+
+// 141. Linked List Cycle
+function hasCycle() {
+  let head = {
+    val: 1,
+    next: {
+      val: 2,
+      next: {
+        val: 3,
+        next: {
+          val: 4,
+          next: {
+            val: 5,
+            next: {
+              val: 6,
+              next: {
+                val: 3,
+                next: {
+                  val: 8,
+                  next: null,
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+  };
+  let mySet = new Set();
+  let curr = head;
+  while (curr) {
+    if (mySet.has(curr.val)) {
+      return true;
+    }
+    mySet.add(curr.val);
+    curr = curr.next;
+  }
+  return false;
+}
+// console.log(hasCycle());
+
+// 141. Linked List Cycle
+function hasCycleWithFlorida() {
+  let head = {
+    val: 1,
+    next: {
+      val: 2,
+      next: {
+        val: 3,
+        next: {
+          val: 4,
+          next: {
+            val: 5,
+            next: {
+              val: 3,
+              next: {
+                val: 7,
+                next: {
+                  val: 8,
+                  next: null,
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+  };
+  // 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8
+  let slow = head;
+  let fast = head;
+  while (fast && fast.next) {
+    slow = slow.next;
+    fast = fast.next.next;
+    console.log(slow.val, fast);
+    if (fast && slow.val === fast.val) {
+      return true;
+    }
+  }
+  return false;
+}
+// console.log(hasCycleWithFlorida());
+
+// 234. Palindrome Linked List
+function isPalindrome() {
+  let head = {
+    val: 1,
+    next: {
+      val: 2,
+      next: {
+        val: 3,
+        next: {
+          val: 3,
+          next: {
+            val: 2,
+            next: {
+              val: 1,
+              next: null,
+            },
+          },
+        },
+      },
+    },
+  };
+  // 1 -> 2 -> 3 -> 3 -> 2 -> 1
+
+  // to get middle node
+  let slow = head;
+  let fast = head;
+  while (fast && fast.next) {
+    slow = slow.next;
+    fast = fast.next.next;
+    if (fast && slow.val === fast.val) {
+      return true;
+    }
+  }
+
+  // 1 -> 2 -> 3 -> 3 -> 2 -> 1
+  // to reverse list from the middle node
+  let preViouse = null;
+  let current = slow;
+  while (current) {
+    let temp = current.next;
+    current.next = preViouse;
+    preViouse = current;
+    current = temp;
+  }
+  // here I will get slow { "val": 3, "next": null }, bcs of this line current.next = preViouse
+  // Please consider to check this console statement, it is interestion to see how ref values modifies
+  console.log("heee", slow, preViouse, head);
+
+  while (preViouse) {
+    if (head.val === preViouse.val) {
+      head = head.next;
+      preViouse = preViouse.next;
+      continue;
+    } else {
+      return false;
+    }
+  }
+  return true;
+}
+// console.log(isPalindrome());
+
+// 160. Intersection of Two Linked Lists
+function getIntersectionNode() {
+  let headA = {
+    val: 1,
+    next: {
+      val: 2,
+      next: {
+        val: 3,
+        next: {
+          val: 4,
+          next: {
+            val: 5,
+            next: {
+              val: 6,
+              next: {
+                val: 7,
+                next: {
+                  val: 8,
+                  next: null,
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+  };
+  let headB = {
+    val: 11,
+    next: {
+      val: 12,
+      next: {
+        val: 13,
+        next: {
+          val: 14,
+          next: {
+            val: 15,
+            next: {
+              val: 16,
+              next: {
+                val: 17,
+                next: {
+                  val: 18,
+                  next: null,
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+  };
+
+  // put headA into hashTable(Set)
+  let hashTableA = new Set();
+  let currA = headA;
+  while (currA) {
+    hashTableA.add(currA.val);
+    currA = currA.next;
+  }
+
+  // now campate each val from headB with hashTableA's val
+  while (headB) {
+    if (hashTableA.has(headB.val)) {
+      return true;
+    }
+    headB = headB.next;
+  }
+  console.log("while", headA, headB);
+  return false;
+}
+// console.log(getIntersectionNode());
+
+// 203. Remove Linked List Elements
+function removeElements() {
+  let head = {
+    val: 4,
+    next: {
+      val: 2,
+      next: {
+        val: 3,
+        next: {
+          val: 4,
+          next: {
+            val: 5,
+            next: {
+              val: 4,
+              next: {
+                val: 7,
+                next: {
+                  val: 8,
+                  next: null,
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+  };
+  let val = 4;
+
+  // 1 -> 2 -> 3 -> 4 ->5 -> 4 -> 7 -> 8 -> null
+  // create sentinal node, bcs first element may have to be deleted
+  let newNode = new CreateNode(78);
+  newNode.next = head;
+  head = newNode;
+
+  let previous = null;
+  let curr = head;
+  while (curr) {
+    if (curr.val === val) {
+      previous.next = previous.next.next;
+    }
+    previous = curr;
+    curr = curr.next;
+  }
+  console.log(head, previous, curr);
+}
+// console.log(removeElements());
+
+// 19. Remove Nth Node From End of List
+function removeNthFromEnd() {
+  let head = {
+    val: 1,
+    next: {
+      val: 2,
+      next: {
+        val: 3,
+        next: {
+          val: 4,
+          next: {
+            val: 5,
+            next: {
+              val: 6,
+              next: {
+                val: 7,
+                next: {
+                  val: 8,
+                  next: null,
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+  };
+  let node = 1;
+  // 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8 -> null
+
+  // create sentinal node(we are deleting)
+  let newNode = new CreateNode(78);
+  newNode.next = head;
+  head = newNode;
+
+  // get the length
+  let curr = head;
+  let length = 0;
+  while (curr) {
+    curr = curr.next;
+    length++;
+  }
+
+  let newCurr = head;
+  for (let i = 0; i < length - node - 1; i++) {
+    newCurr = newCurr.next;
+  }
+  newCurr.next = newCurr.next.next;
+  // because we added sentinal node, so the actual result will be the next node of it
+  return head.next;
+}
+// console.log(removeNthFromEnd());
