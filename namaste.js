@@ -820,297 +820,10 @@ function insertionSortByMe(arr) {
 // const arr = [2, 15, 4, 13, 7, 41, 6, 40, 12, 41];
 // const arr = -120;
 // const arr = 121;
-console.log("-------------");
+// console.log("-------------");
 
 // --------------------------- 7
-
-// // 707. Design Linked List
-// /**
-//  * Your MyLinkedList object will be instantiated and called as such:
-//  * var obj = new MyLinkedList()
-//  * var param_1 = obj.get(index)
-//  * obj.addAtHead(val)
-//  * obj.addAtTail(val)
-//  * obj.addAtIndex(index,val)
-//  * obj.deleteAtIndex(index)
-//  */
-
-// class CreateNode {
-//   constructor(val) {
-//     this.val = val;
-//     this.next = null;
-//   }
-// }
-// var MyLinkedList = function (val) {
-//   this.head = null;
-//   this.next = null;
-//   this.size = 0;
-//   let newNode = new CreateNode(val);
-//   this.head = newNode;
-// };
-
-// MyLinkedList.prototype.addAtHead = function (val) {
-//   // 1 // new CreateNode(val)
-//   // 1 --> 2 --> 3 // newNode.next=this.head
-//   let newNode = new CreateNode(val);
-//   newNode.next = this.head;
-//   this.head = newNode;
-//   this.size++;
-// };
-
-// MyLinkedList.prototype.addAtTail = function (val) {
-//   // 4 // new CreateNode(val)
-//   // 1 --> 2 --> 3 // newNode.next=this.head
-//   let newNode = new CreateNode(val);
-//   let head = this.head;
-//   let isTailNodeGet = false;
-//   let nextNode = head;
-
-//   if (this.head === null) {
-//     this.head = null;
-//     this.next = null;
-//     let newNode = new CreateNode(val);
-//     this.head = newNode;
-//     this.size = 0;
-//     return;
-//   }
-//   while (!isTailNodeGet) {
-//     if (nextNode.next !== null) {
-//       nextNode = nextNode.next;
-//     } else {
-//       nextNode.next = newNode;
-//       this.size++;
-//       isTailNodeGet = true;
-//     }
-//   }
-// };
-
-// MyLinkedList.prototype.addAtIndex = function (index, val) {
-//   // 1 --> 2 --> 3 --> 4 --> 5
-
-//   if (index < 0 || index > this.size) return;
-//   if (index === 0) return this.addAtHead(val);
-//   if (index === this.size) return this.addAtTail(val);
-//   const newNode = new CreateNode(val);
-//   let curr = this.head;
-//   for (let i = 0; i < index - 1; i++) curr = curr.next;
-//   newNode.next = curr.next;
-//   curr.next = newNode;
-//   this.size++;
-// };
-
-// MyLinkedList.prototype.get = function (index) {
-//   // 3 --> 4
-//   // 1 --> 2 --> 3 --> 6 --> 4 --> 5
-//   if (index < 0 || index > this.size) return -1;
-//   let curr = this.head;
-//   for (let i = 0; i < index; i++) {
-//     curr = curr.next;
-//   }
-//   return curr.val;
-// };
-
-// MyLinkedList.prototype.deleteAtIndex = function (index) {
-//   // 3 --> 14
-//   // 1 --> 2 --> 3 --> 14 --> 5
-
-//   if (index < 0 || index > this.size) return;
-//   if (index === 0) this.head = this.head.next;
-//   else {
-//     let curr = this.head;
-//     for (let i = 0; i < index - 1; i++) curr = curr.next;
-//     curr.next = curr.next.next;
-//   }
-//   this.size--;
-// };
-
-// var obj = new MyLinkedList(2);
-// obj.addAtHead(1);
-// obj.addAtTail(25);
-// obj.addAtTail(14);
-// obj.addAtTail(5);
-// obj.addAtIndex(3, 15);
-// // obj.get(2);
-// obj.deleteAtIndex(2);
-// console.log(obj);
-// // console.log(obj.get(2));
-console.log("----------");
-// 876. Middle of the Linked List
-function middleNodeByMe() {
-  let head = {
-    val: 1,
-    next: {
-      val: 2,
-      next: {
-        val: 3,
-        next: {
-          val: 14,
-          next: {
-            val: 5,
-            next: {
-              val: 20,
-              next: {
-                val: 25,
-                next: null,
-              },
-            },
-          },
-        },
-      },
-    },
-    size: 4,
-  };
-  // 1,2,3,4,5,6
-  // 1 --> 2 --> 3 --> 14 --> 5 --> 20
-  let isTailNodeGet = false;
-  let nextNode = head;
-  let size = 0;
-
-  while (!isTailNodeGet) {
-    if (nextNode.next !== null) {
-      nextNode = nextNode.next;
-    } else {
-      isTailNodeGet = true;
-    }
-    // console.log(nextNode);
-    size++;
-  }
-  size--;
-  // 1 --> 2 --> 3 --> 14 --> 5 --> 20
-  // 1 --> 2 --> 3 --> 14 --> 5 --> 20 --> 12
-  let terminationCondi = Math.ceil(size / 2);
-  // console.log(terminationCondi, size);
-  if (size % 2 === 0) {
-    terminationCondi = size / 2;
-  }
-  let curr = head;
-  for (let i = 0; i < terminationCondi; i++) {
-    curr = curr.next;
-  }
-  return curr;
-}
-// console.log(middleNodeByMe());
-
-function middleNodeByMeNamasteJs() {
-  // 1,2,3,4,5,6
-  // 1 --> 2 --> 3 --> 14 --> 5 --> 20
-  // 1 --> 2 --> 3 --> 14 --> 5 --> 20 --> 12
-  let head = {
-    val: 1,
-    next: {
-      val: 2,
-      next: {
-        val: 3,
-        next: {
-          val: 14,
-          next: {
-            val: 5,
-            next: {
-              val: 20,
-              next: null,
-            },
-          },
-        },
-      },
-    },
-    size: 4,
-  };
-
-  let slow = head;
-  let fast = head;
-  while (fast && fast.next) {
-    slow = slow.next;
-    fast = fast.next.next;
-    console.log(slow, fast);
-  }
-  // return slow;
-  // console.log(slow);
-}
-// middleNodeByMeNamasteJs();
-
-function reversedLinkedListByNamasteJs() {
-  // 1,2,3,4,5,6
-  // 1 --> 2 --> 3 --> 14 --> 5 --> 20
-  // 20 --> 5 --> 14 --> 3 --> 2 --> 1
-  let head = {
-    val: 1,
-    next: {
-      val: 2,
-      next: {
-        val: 3,
-        next: {
-          val: 14,
-          next: {
-            val: 5,
-            next: {
-              val: 20,
-              next: null,
-            },
-          },
-        },
-      },
-    },
-    size: 4,
-  };
-
-  let preViouse = null;
-  let current = head;
-  while (current) {
-    let temp = current.next;
-    current.next = preViouse;
-    preViouse = current;
-    current = temp;
-  }
-  // return slow;
-  head = preViouse;
-  console.log(head);
-}
-// console.log(reversedLinkedListByNamasteJs());
-
-function LinkedListCycle() {
-  // 1 --> 2 --> 3 --> 14 --> 5 --> 20 --> null // not cycle
-  // 1 --> 2 --> 3 --> 14 --> 5 --> 20 --> 3  //cycle
-  let head = {
-    val: 1,
-    next: {
-      val: 2,
-      next: {
-        val: 25,
-        next: {
-          val: 14,
-          next: {
-            val: 5,
-            next: {
-              val: 20,
-              next: {
-                val: 13,
-                next: null,
-              },
-            },
-          },
-        },
-      },
-    },
-    size: 4,
-  };
-  let setDataStructure = new Set();
-
-  let curr = head;
-  while (curr) {
-    if (!setDataStructure.has(curr.val)) {
-      setDataStructure.add(curr.val);
-    } else {
-      // console.log("get cycle", curr);
-      return true;
-    }
-    curr = curr.next;
-  }
-  return false;
-}
-// console.log(LinkedListCycle());
-
-// ------------------------------------------
-console.log("Linked List from scrach");
+console.log("Linked List Start");
 
 class CreateNode {
   constructor(val) {
@@ -1695,3 +1408,305 @@ function removeNthFromEnd() {
   return head.next;
 }
 // console.log(removeNthFromEnd());
+
+function removeNthFromEndWithOnePass() {
+  let head = {
+    val: 1,
+    next: null,
+  };
+  let node = 1;
+  // 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8 -> null
+  // N -> 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8 -> null
+
+  // create sentinal node(we are deleting)
+  let newNode = new CreateNode(78);
+  newNode.next = head;
+  head = newNode;
+
+  // get the fast node
+  let fast = head;
+  for (let i = 1; i <= node; i++) {
+    fast = fast.next;
+  }
+  // loop over the fast node till the end with slow node
+  let slow = head;
+  let previous = null;
+  while (fast) {
+    previous = slow;
+    slow = slow.next;
+    fast = fast.next;
+  }
+  console.log(previous);
+  previous.next = previous.next.next;
+  return head.next;
+}
+// console.log(removeNthFromEndWithOnePass());
+
+// 83. Remove Duplicates from Sorted List
+function deleteDuplicates() {
+  let head = {
+    val: 1,
+    next: {
+      val: 1,
+      next: {
+        val: 2,
+        next: {
+          val: 3,
+          next: {
+            val: 3,
+            next: {
+              val: 4,
+              next: {
+                val: 4,
+                next: null,
+              },
+            },
+          },
+        },
+      },
+    },
+  };
+  // 1 -> 1 -> 2 -> 3 -> 3 -> 4 -> 4 -> null
+  let curr = head;
+  while (curr.next) {
+    if (curr.val === curr.next.val) {
+      curr.next = curr.next.next;
+      continue;
+    }
+    curr = curr.next;
+  }
+  return head;
+}
+// console.log(deleteDuplicates());
+
+// 328. Odd Even Linked List
+function oddEvenList() {
+  let head = {
+    val: 2,
+    next: {
+      val: 1,
+      next: {
+        val: 3,
+        next: {
+          val: 5,
+          next: {
+            val: 6,
+            next: {
+              val: 4,
+              next: {
+                val: 7,
+                next: null,
+              },
+            },
+          },
+        },
+      },
+    },
+  };
+  // 2 -> 1 -> 3 -> 5 -> 6 -> 4 -> 7 -> null
+  // 2 -> 3 -> 6 -> 7 -> 1 -> 5 -> 4 -> null
+  let odd = head;
+  let even = head.next;
+  let tempEven = even;
+  while (odd.next && even.next) {
+    odd.next = odd.next.next;
+    even.next = even.next.next;
+    odd = odd.next;
+    even = even.next;
+    console.log(odd, even);
+  }
+  odd.next = tempEven;
+  return head;
+}
+// console.log(oddEvenList());
+
+// 2. Add Two Numbers
+function addTwoNumbersOrLinkList() {
+  let headA = {
+    val: 3,
+    next: {
+      val: 4,
+      next: {
+        val: 9,
+        next: null,
+      },
+    },
+  };
+  let headB = {
+    val: 4,
+    next: {
+      val: 8,
+      next: {
+        val: 1,
+        next: {
+          val: 9,
+          next: null,
+        },
+      },
+    },
+  };
+  // 3 -> 4 -> 9
+  // 4 -> 8 -> 1 -> 9
+  // 7 -> 2 -> 1 -> 0 -> 1
+  let previousCarry = 0;
+  let newNode = new CreateNode(0);
+  let sumList = newNode;
+  let tempSumList = sumList;
+  while (headA || headB || previousCarry) {
+    let L1Val = headA && headA.val ? headA.val : 0;
+    let L2Val = headB && headB.val ? headB.val : 0;
+    let totalVal = L1Val + L2Val + previousCarry;
+    let getRemainder = totalVal % 10;
+    previousCarry = Math.floor(totalVal / 10);
+    let newNode = new CreateNode(getRemainder);
+    sumList.next = newNode;
+    sumList = sumList.next;
+    // console.log(headA, headB, getRemainder, previousCarry, newNode);
+    headA = headA ? headA.next : null;
+    headB = headB ? headB.next : null;
+  }
+  return tempSumList.next;
+}
+// console.log(addTwoNumbersOrLinkList());
+
+// 21. Merge Two Sorted Lists
+function mergeTwoLists() {
+  let headA = {
+    val: 2,
+    next: {
+      val: 5,
+      next: {
+        val: 7,
+        next: {
+          val: 8,
+          next: null,
+        },
+      },
+    },
+  };
+  let headB = {
+    val: 1,
+    next: {
+      val: 3,
+      next: {
+        val: 4,
+        next: {
+          val: 6,
+          next: {
+            val: 9,
+            next: null,
+          },
+        },
+      },
+    },
+  };
+  // 2 -> 5 -> 7 -> 8 -> null
+  // 1 -> 3 -> 4 -> 6 -> 9 -> null
+
+  let newNode = new CreateNode(0);
+  let sortedNode = newNode;
+  let tempSortedNode = sortedNode;
+  while (headA && headB) {
+    if (headA.val < headB.val) {
+      sortedNode.next = headA;
+      headA = headA.next;
+      // console.log("headA -->", headA);
+    } else {
+      sortedNode.next = headB;
+      headB = headB.next;
+      // console.log("headB -->", headB);
+    }
+    sortedNode = sortedNode.next;
+  }
+  // console.log(headA, headB);
+  if (headA) {
+    sortedNode.next = headA;
+  } else if (headB) {
+    sortedNode.next = headB;
+  }
+  return tempSortedNode.next;
+}
+// console.log(mergeTwoLists());
+
+// 61. Rotate List
+// function rotateRight() {
+//   let head = {
+//     val: 1,
+//     next: {
+//       val: 2,
+//       next: {
+//         val: 3,
+//         next: {
+//           val: 4,
+//           next: {
+//             val: 5,
+//             next: null,
+//           },
+//         },
+//       },
+//     },
+//   };
+//   const totalRotateTime = 2;
+//   let curr = head;
+//   let count = 0;
+//   while (curr) {
+//     curr = curr.next;
+//     count++;
+//   }
+//   // 1 -> 2 -> 3 -> 4 -> 5 -> null
+//   let getSecondHead = head;
+//   let getActualRotateTime = totalRotateTime % count;
+//   for (let i = 1; i <= getActualRotateTime - 1; i++) {
+//     getSecondHead = getSecondHead.next;
+//   }
+//   console.log(getActualRotateTime);
+//   let secondHead = getSecondHead;
+//   let secondHeadStart = secondHead;
+//   while (secondHead.next) {
+//     secondHead = secondHead.next;
+//   }
+//   let getFirstHeadStart = head;
+//   let getActualHeadStart = head;
+//   for (let i = 1; i <= getActualRotateTime - 2; i++) {
+//     getFirstHeadStart = getFirstHeadStart.next;
+//   }
+//   getFirstHeadStart.next = null;
+//   // console.log(getActualHeadStart, secondHeadStart, secondHead);
+//   secondHead.next = getActualHeadStart;
+//   console.log(secondHeadStart);
+//   // return secondHeadStart;
+// }
+// function rotateRight() {
+//   let head = {
+//     val: 1,
+//     next: {
+//       val: 2,
+//       next: {
+//         val: 3,
+//         next: {
+//           val: 4,
+//           next: {
+//             val: 5,
+//             next: null,
+//           },
+//         },
+//       },
+//     },
+//   };
+//   const totalRotateTime = 2;
+//   let curr = head;
+//   let count = 0;
+//   while (curr) {
+//     curr = curr.next;
+//     count++;
+//   }
+//   let getActualRotateTime = totalRotateTime % count;
+
+//   let slow = head;
+//   let fast = head;
+//   // 1 -> 2 -> 3 -> 4 -> 5 -> null
+//   for (let i = 1; i <= getActualRotateTime - 1; i++) {
+//     getSecondHead = getSecondHead.next;
+//   }
+// }
+// console.log(rotateRight());
