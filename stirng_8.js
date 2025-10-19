@@ -120,3 +120,143 @@ function balancedStringSplit() {
   return maxNumBalStr;
 }
 // console.log(balancedStringSplit());
+
+// 541. Reverse String II
+function reverseStr() {
+  let s = "abcdefghijklmnopqr";
+  let k = 2;
+  //"a b c d  e f g h  i j k l  m n o p  q r";
+
+  for (let i = 0; i < s.length; i = i + 2 * k) {
+    console.log(s[i]);
+
+    // for (let j = 0; j < array.length; j++) {
+    //   const element = array[j];
+    // }
+  }
+}
+// console.log(reverseStr());
+
+// 125. Valid Palindrome
+function isPalindrome() {
+  let s = "A man, a plan, a canal: Panama";
+  s = s.toLowerCase();
+  let addToRight = "";
+  let addToLeft = "";
+  for (let i = 0; i < s.length; i++) {
+    if (/^[A-Za-z]+$/.test(s[i])) {
+      addToRight = addToRight + s[i];
+      addToLeft = s[i] + addToLeft;
+    }
+  }
+  console.log(addToLeft, addToRight);
+  return addToLeft === addToRight;
+}
+// console.log(isPalindrome());
+
+// 125. Valid Palindrome
+function isPalindromeWithTwoPointer() {
+  let s = "A man, a plan, a canal: Panama";
+  s = s.toLowerCase();
+
+  let i = 0;
+  let j = s.length - 1;
+  while (i < j) {
+    if (!/^[A-Za-z]+$/.test(s[i])) {
+      ++i;
+      continue;
+    } else if (!/^[A-Za-z]+$/.test(s[j])) {
+      --j;
+      continue;
+    } else if (s[i] !== s[j]) {
+      return false;
+    }
+    ++i;
+    --j;
+  }
+  return true;
+
+  // for (let i = 0; i < Math.ceil(s.length / 2); i++) {
+  //   if (/^[A-Za-z]+$/.test(s[i])) {
+  //     console.log(s[i], s[s.length - i - 1]);
+  //     // if (s[i] !== s[length - i - 1]) {
+  //     //   return false;
+  //     // }
+  //   }
+  // }
+  // return true;
+}
+// console.log(isPalindromeWithTwoPointer());
+
+// 1903. Largest Odd Number in String
+function largestOddNumber() {
+  let num = "35427246";
+  let largestOdd = "";
+  while (num) {
+    if (parseInt(num) % 2 !== 0) {
+      console.log(num);
+      return String(num);
+    }
+    num = Math.floor(parseInt(num) / 10);
+  }
+  return largestOdd;
+}
+// console.log(largestOddNumber());
+
+function largestOddNumberNamaste() {
+  let num = "35427246";
+  let i = num.length - 1;
+  while (i >= 0) {
+    if (Number(num[i]) % 2 === 1) {
+      return num.substring(0, i + 1);
+    }
+    --i;
+  }
+  return "";
+}
+// console.log(largestOddNumberNamaste());
+
+// 14. Longest Common Prefix
+function longestCommonPrefix() {
+  let strs = ["flower", "flow", "flight"];
+
+  let i = 0;
+  while (i < strs[0].length) {
+    let firstWordChar = strs[0][i];
+
+    for (let j = 1; j < strs.length; j++) {
+      if (
+        firstWordChar !== strs[j][i] ||
+        i === strs[j].length // <-- I didn't get it
+      ) {
+        return strs[0].substring(0, i);
+      }
+    }
+    ++i;
+  }
+}
+// console.log(longestCommonPrefix());
+
+// 242. Valid Anagram
+function isAnagram() {
+  let s = "anagramrr";
+  let t = "nagaramaa";
+  if (s.length !== t.length) return false;
+
+  let tHasTable = {};
+  for (let i = 0; i < t.length; i++) {
+    if (!tHasTable[t[i]]) {
+      tHasTable[t[i]] = 1;
+    } else {
+      tHasTable[t[i]] = ++tHasTable[t[i]];
+    }
+  }
+  for (let j = 0; j < s.length; j++) {
+    if (!tHasTable[s[j]] || tHasTable[s[j]] < 0) {
+      return false;
+    }
+    --tHasTable[s[j]];
+  }
+  return true;
+}
+console.log(isAnagram());
